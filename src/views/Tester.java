@@ -1,5 +1,4 @@
-import javax.swing.*;
-import java.awt.*;
+package views;
 
 /**
  * Created by Usuario on 03-Mar-17.
