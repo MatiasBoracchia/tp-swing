@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 
 public class SettingWindow extends JFrame {
-    public SettingWindow(){
-
+    JButton back;
+    public SettingWindow(Controller controller){
         //JFrame
         this.setTitle("Settings");
-        this.setSize(250,250);
+        this.setSize(250,350);
         this.setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -30,15 +30,15 @@ public class SettingWindow extends JFrame {
         //Buttons & Labels
         JLabel settings = new JLabel("Settings");
         JLabel sound = new JLabel("Sound:");
-        JRadioButton soundRadioButtons1 = new JRadioButton("On");
-        JRadioButton soundRadioButtons2 = new JRadioButton("Off");
+        final JRadioButton soundRadioButtons1 = new JRadioButton("On");
+        final JRadioButton soundRadioButtons2 = new JRadioButton("Off");
         JLabel music = new JLabel("Music:");
-        JRadioButton musicRadioButtons1 = new JRadioButton("On");
-        JRadioButton musicRadioButtons2 = new JRadioButton("Off");
+        final JRadioButton musicRadioButtons1 = new JRadioButton("On");
+        final JRadioButton musicRadioButtons2 = new JRadioButton("Off");
         JLabel graphics = new JLabel("Graphics:");
-        JCheckBox graphicsCheckBox1 = new JCheckBox("Shadows");
-        JCheckBox graphicsCheckBox2 = new JCheckBox("Anti-aliasing");
-        JButton back = new JButton("Back");
+        final JCheckBox graphicsCheckBox1 = new JCheckBox("Shadows");
+        final JCheckBox graphicsCheckBox2 = new JCheckBox("Anti-aliasing");
+        back = new JButton("Back");
         back.setSize(100,40);
 
         //Sub Panels and ButtonGroups(For not having both buttons activated)
@@ -83,8 +83,8 @@ public class SettingWindow extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(back);
-        buttonPanel.setPreferredSize(new Dimension(250,50));
-        back.setPreferredSize(new Dimension(200,40));
+        buttonPanel.setPreferredSize(new Dimension(250, 50));
+        back.setPreferredSize(new Dimension(200, 40));
 
 
         thePanel.add(soundPanel);
@@ -97,9 +97,10 @@ public class SettingWindow extends JFrame {
         ActionListener printConfiguration = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<AbstractButton> array = new ArrayList<>();
-                ArrayList<AbstractButton> array2 = new ArrayList<>();
-                ArrayList<String> array3 = new ArrayList<>();
+
+                ArrayList<AbstractButton> array = new ArrayList<AbstractButton>();
+                ArrayList<AbstractButton> array2 = new ArrayList<AbstractButton>();
+                ArrayList<String> array3 = new ArrayList<String>();
                 array.add(soundRadioButtons1);
                 array.add(soundRadioButtons2);
                 array.add(musicRadioButtons1);
@@ -121,8 +122,8 @@ public class SettingWindow extends JFrame {
                     }
 
                 }
-                    System.out.println("Sound:"+array2.get(0).getText()+", "+"Music:"+array2.get(1).getText()+
-                            ", "+"Shadows:"+array3.get(0)+ ", "+"Anti-aliasing:"+array3.get(1));
+                System.out.println("Sound:"+array2.get(0).getText()+", "+"Music:"+array2.get(1).getText()+
+                        ", "+"Shadows:"+array3.get(0)+ ", "+"Anti-aliasing:"+array3.get(1));
 
             }
         };
@@ -134,16 +135,7 @@ public class SettingWindow extends JFrame {
         graphicsCheckBox1.addActionListener(printConfiguration);
         graphicsCheckBox2.addActionListener(printConfiguration);
 
-        ActionListener goBack = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Window window = new Window();
-                window.setVisible(true);
-                hide();
 
-            }
-        };
-        back.addActionListener(goBack);
-        //back.addActionListener(new GoBack());
+        back.addActionListener(controller);
     }
 }

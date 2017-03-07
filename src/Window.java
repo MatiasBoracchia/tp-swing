@@ -7,62 +7,68 @@ import java.awt.event.ActionListener;
  * Created by Usuario on 03-Mar-17.
  */
 public class Window extends JFrame {
-    public Window(){
-        this.setTitle("Main Menu");
-        this.pack();
-        this.setSize(400,400);
-        this.setLocationRelativeTo(null);
-
+    JButton start;
+    JButton settings;
+    JButton exit;
+    public Window(Controller controller){
+        setTitle("Main Menu");
+        pack();
+        setSize(300,250);
+        setResizable(false);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Panel
-        JPanel panel = new JPanel();
-        this.add(panel);
-        //BoxLayout
-         BoxLayout boxLayout = new BoxLayout(panel,BoxLayout.PAGE_AXIS);
-        panel.setLayout(boxLayout);
 
-        //Box theBox = Box.createVerticalBox();
+        //Panels
+        JPanel mainPanel = new JPanel();
 
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(Box.createVerticalStrut(35));
+        JPanel titlePanel = new JPanel();
+        add(mainPanel);
+
+        //Layouts
+        BorderLayout borderLayout = new BorderLayout();
+        BoxLayout buttonBox = new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS);
+        BoxLayout textBox = new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS);
+
+        buttonPanel.setLayout(buttonBox);
+        titlePanel.setLayout(textBox);
+        mainPanel.setLayout(borderLayout);
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+
+        //Labels
+        JLabel title = new JLabel("Trabajo Práctico Swing");
+        JLabel subtitle = new JLabel("por Matías Boracchia y Franco Palumbo");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        titlePanel.add(title);
+        titlePanel.add(subtitle);
 
         //Buttons
-        JButton start = new JButton("Start");
-        start.setSize(new Dimension(40,40));
+        start = new JButton("Start");
+        settings = new JButton("Settings");
+        exit = new JButton("Exit");
+        start.setAlignmentX(Component.CENTER_ALIGNMENT);
+        start.setPreferredSize(new Dimension(200,30));
+        start.setMaximumSize(new Dimension(200,30));
+        start.setMinimumSize(new Dimension(200,30));
+        settings.setAlignmentX(Component.CENTER_ALIGNMENT);
+        settings.setMaximumSize(start.getMinimumSize());
+        exit.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exit.setMaximumSize(start.getMinimumSize());
 
+        buttonPanel.add(start);
+        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(settings);
+        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(exit);
+        buttonPanel.add(Box.createVerticalStrut(20));
 
-        JButton setting = new JButton("Setting");
+        start.addActionListener(controller);
+        settings.addActionListener(controller);
+        exit.addActionListener(controller);
 
-        JButton exit = new JButton("Exit");
-
-        panel.add(start);
-        panel.add(Box.createVerticalStrut(40));
-        start.setPreferredSize(new Dimension(40,40));
-
-        panel.add(setting);
-        panel.add(Box.createVerticalStrut(40));
-
-        panel.add(exit);
-        //theBox.add(Box.createHorizontalStrut(100));
-
-
-        this.add(panel);
-
-
-        //Label
-        /*JLabel titulo = new JLabel("Titulo");
-        panel.add(titulo);
-
-        panel.add(start);
-        panel.add(setting);
-        panel.add(exit);
-*/
-        ActionListener goToSettings = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SettingWindow settings = new SettingWindow();
-                settings.setVisible(true);
-                hide();
-            }
-        };
-        setting.addActionListener(goToSettings);
     }
 }
