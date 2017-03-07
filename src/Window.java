@@ -39,7 +39,9 @@ public class Window extends JFrame {
 
         //Labels
         JLabel title = new JLabel("Trabajo Práctico Swing");
+        title.setFont(new Font("Helvetica",Font.BOLD,24));
         JLabel subtitle = new JLabel("por Matías Boracchia y Franco Palumbo");
+        subtitle.setFont(new Font("Helvetica",Font.BOLD,12));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
