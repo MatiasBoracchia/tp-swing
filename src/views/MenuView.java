@@ -1,23 +1,22 @@
 package views;
 
-import controllers.Controller;
+import controllers.NavigationController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
- * Created by Usuario on 03-Mar-17.
+ * Created by Matias on 03-Mar-17.
  */
-public class MenuWindow extends JFrame {
+public class MenuView extends JFrame {
 
     public JButton start;
     public JButton settings;
     public JButton exit;
 
-    public MenuWindow(Controller controller) {
+    public MenuView(NavigationController navigationController) {
 
+        // ----- Main Frame -----
         setTitle("Main Menu");
         pack();
         setSize(300, 250);
@@ -25,26 +24,17 @@ public class MenuWindow extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Panels
+        // ----- Main Panel -----
         JPanel mainPanel = new JPanel();
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(Box.createVerticalStrut(35));
-        JPanel titlePanel = new JPanel();
-        add(mainPanel);
-
-        //Layouts
         BorderLayout borderLayout = new BorderLayout();
-        BoxLayout buttonBox = new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS);
-        BoxLayout textBox = new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS);
-
-        buttonPanel.setLayout(buttonBox);
-        titlePanel.setLayout(textBox);
         mainPanel.setLayout(borderLayout);
-        mainPanel.add(titlePanel, BorderLayout.NORTH);
-        mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        //Labels
+        // ----- Title Panel -----
+        JPanel titlePanel = new JPanel();
+        BoxLayout textBox = new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS);
+        titlePanel.setLayout(textBox);
+
+        // ----- Title Panel Content -----
         JLabel title = new JLabel("Trabajo Práctico Swing");
         title.setFont(new Font("Helvetica", Font.BOLD, 24));
         JLabel subtitle = new JLabel("por Matías Boracchia y Franco Palumbo");
@@ -55,7 +45,13 @@ public class MenuWindow extends JFrame {
         titlePanel.add(title);
         titlePanel.add(subtitle);
 
-        //Buttons
+        // ----- Button Panel -----
+        JPanel buttonPanel = new JPanel();
+        BoxLayout buttonBox = new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS);
+        buttonPanel.add(Box.createVerticalStrut(35));
+        buttonPanel.setLayout(buttonBox);
+
+        // ----- Button Panel Content -----
         start = new JButton("Start Game");
         settings = new JButton("Settings");
         exit = new JButton("Exit");
@@ -75,9 +71,15 @@ public class MenuWindow extends JFrame {
         buttonPanel.add(exit);
         buttonPanel.add(Box.createVerticalStrut(20));
 
-        start.addActionListener(controller);
-        settings.addActionListener(controller);
-        exit.addActionListener(controller);
+        // ----- Main Panel Content -----
+        add(mainPanel);
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+
+        // ----- Listeners -----
+        start.addActionListener(navigationController);
+        settings.addActionListener(navigationController);
+        exit.addActionListener(navigationController);
 
     }
 

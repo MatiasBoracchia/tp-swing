@@ -1,6 +1,6 @@
 package views;
 
-import controllers.Controller;
+import controllers.NavigationController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,93 +9,107 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Created by Usuario on 05-Mar-17.
+ * Created by Matias on 05-Mar-17.
  */
-
-public class SettingsWindow extends JFrame {
+public class SettingsView extends JFrame {
 
     public JButton back;
 
-    public SettingsWindow(Controller controller) {
+    public SettingsView(NavigationController navigationController) {
 
-        //JFrame
+        // ----- Main Frame -----
         this.setTitle("Settings");
         this.setSize(250, 350);
         this.setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
-        //JPanel
+        // ----- Main Panel -----
         JPanel thePanel = new JPanel();
         this.add(thePanel);
-
-        //Layout
         BoxLayout boxLayout = new BoxLayout(thePanel, BoxLayout.PAGE_AXIS);
         thePanel.setLayout(boxLayout);
 
-        //Buttons & Labels
-        JLabel settings = new JLabel("Setting");
-        JLabel sound = new JLabel("Sound:");
-        final JRadioButton soundRadioButtons1 = new JRadioButton("On");
-        final JRadioButton soundRadioButtons2 = new JRadioButton("Off");
-        JLabel music = new JLabel("Music:");
-        final JRadioButton musicRadioButtons1 = new JRadioButton("On");
-        final JRadioButton musicRadioButtons2 = new JRadioButton("Off");
-        JLabel graphics = new JLabel("Graphics:");
-        final JCheckBox graphicsCheckBox1 = new JCheckBox("Shadows");
-        final JCheckBox graphicsCheckBox2 = new JCheckBox("Anti-aliasing");
-        back = new JButton("Back");
-        back.setSize(100, 40);
+        // ----- Title Panel Content -----
+        JLabel settings = new JLabel("Settings");
 
-        //Sub Panels and ButtonGroups(For not having both buttons activated)
+        // ----- Title Panel -----
         JPanel settingsPanel = new JPanel();
         thePanel.add(settingsPanel);
         settingsPanel.add(settings);
+
+        // ----- Sound Panel Content -----
+        JLabel sound = new JLabel("Sound:");
+        JRadioButton soundRadioButtons1 = new JRadioButton("On");
+        final JRadioButton soundRadioButtons2 = new JRadioButton("Off");
+
+        // ----- Sound Panel Button Group -----
         ButtonGroup soundGroup = new ButtonGroup();
         soundGroup.add(soundRadioButtons1);
         soundGroup.add(soundRadioButtons2);
 
-        ButtonGroup musicGroup = new ButtonGroup();
-        musicGroup.add(musicRadioButtons1);
-        musicGroup.add(musicRadioButtons2);
-
+        // ----- Sound Panel -----
         JPanel soundPanel = new JPanel();
         soundPanel.add(sound);
         soundPanel.add(soundRadioButtons1);
         soundPanel.add(soundRadioButtons2);
         soundRadioButtons1.setSelected(true);
 
+        // ----- Music Panel Content -----
+        JLabel music = new JLabel("Music:");
+        final JRadioButton musicRadioButtons1 = new JRadioButton("On");
+        final JRadioButton musicRadioButtons2 = new JRadioButton("Off");
+
+        // ----- Music Panel Button Group -----
+        ButtonGroup musicGroup = new ButtonGroup();
+        musicGroup.add(musicRadioButtons1);
+        musicGroup.add(musicRadioButtons2);
+
+        // ----- Music Panel -----
         JPanel musicPanel = new JPanel();
         musicPanel.add(music);
         musicPanel.add(musicRadioButtons1);
         musicPanel.add(musicRadioButtons2);
         musicRadioButtons2.setSelected(true);
 
-        JPanel graphicPanel = new JPanel();
+        // ----- Graphic Panel Content -----
+        JLabel graphics = new JLabel("Graphics:");
+        final JCheckBox graphicsCheckBox1 = new JCheckBox("Shadows");
+        final JCheckBox graphicsCheckBox2 = new JCheckBox("Anti-aliasing");
 
+        // ----- Graphics Title Panel -----
+        JPanel graphicPanel = new JPanel();
         graphicPanel.add(graphics);
         graphicPanel.setPreferredSize(new Dimension(250, 30));
         graphicPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         graphicPanel.add(Box.createHorizontalStrut(130));
 
+        // ----- Graphics Check Box Panel -----
         JPanel checkBoxPanel = new JPanel();
         checkBoxPanel.add(graphicsCheckBox1);
         checkBoxPanel.add(graphicsCheckBox2);
-
         graphicsCheckBox1.setSelected(true);
 
+        // ----- Back Button Panel Content -----
+        back = new JButton("Back");
+        back.setSize(100, 40);
+
+        // ----- Back Button Panel -----
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(back);
         buttonPanel.setPreferredSize(new Dimension(250, 50));
         back.setPreferredSize(new Dimension(200, 40));
 
+        // ----- Main Panel Content -----
         thePanel.add(soundPanel);
         thePanel.add(musicPanel);
         thePanel.add(graphicPanel);
         thePanel.add(checkBoxPanel);
         thePanel.add(buttonPanel);
 
-        //ActionListener
+        /**
+         * Listener that prints all the settings once one of them is changed
+         */
         ActionListener printConfiguration = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,6 +138,7 @@ public class SettingsWindow extends JFrame {
             }
         };
 
+        // ----- Listeners -----
         soundRadioButtons1.addActionListener(printConfiguration);
         soundRadioButtons2.addActionListener(printConfiguration);
         musicRadioButtons1.addActionListener(printConfiguration);
@@ -131,8 +146,7 @@ public class SettingsWindow extends JFrame {
         graphicsCheckBox1.addActionListener(printConfiguration);
         graphicsCheckBox2.addActionListener(printConfiguration);
 
-
-        back.addActionListener(controller);
+        back.addActionListener(navigationController);
 
     }
 
