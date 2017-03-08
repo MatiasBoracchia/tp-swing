@@ -1,3 +1,7 @@
+package views;
+
+import controllers.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,14 +10,17 @@ import java.awt.event.ActionListener;
 /**
  * Created by Usuario on 03-Mar-17.
  */
-public class Window extends JFrame {
-    JButton start;
-    JButton settings;
-    JButton exit;
-    public Window(Controller controller){
+public class MenuWindow extends JFrame {
+
+    public JButton start;
+    public JButton settings;
+    public JButton exit;
+
+    public MenuWindow(Controller controller) {
+
         setTitle("Main Menu");
         pack();
-        setSize(300,250);
+        setSize(300, 250);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,10 +45,10 @@ public class Window extends JFrame {
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
         //Labels
-        JLabel title = new JLabel("Trabajo Pr·ctico Swing");
-        title.setFont(new Font("Helvetica",Font.BOLD,24));
-        JLabel subtitle = new JLabel("por MatÌas Boracchia y Franco Palumbo");
-        subtitle.setFont(new Font("Helvetica",Font.BOLD,12));
+        JLabel title = new JLabel("Trabajo Pr√°ctico Swing");
+        title.setFont(new Font("Helvetica", Font.BOLD, 24));
+        JLabel subtitle = new JLabel("por Mat√≠as Boracchia y Franco Palumbo");
+        subtitle.setFont(new Font("Helvetica", Font.BOLD, 12));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -49,13 +56,13 @@ public class Window extends JFrame {
         titlePanel.add(subtitle);
 
         //Buttons
-        start = new JButton("Start");
+        start = new JButton("Start Game");
         settings = new JButton("Settings");
         exit = new JButton("Exit");
         start.setAlignmentX(Component.CENTER_ALIGNMENT);
-        start.setPreferredSize(new Dimension(200,30));
-        start.setMaximumSize(new Dimension(200,30));
-        start.setMinimumSize(new Dimension(200,30));
+        start.setPreferredSize(new Dimension(200, 30));
+        start.setMaximumSize(new Dimension(200, 30));
+        start.setMinimumSize(new Dimension(200, 30));
         settings.setAlignmentX(Component.CENTER_ALIGNMENT);
         settings.setMaximumSize(start.getMinimumSize());
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -73,4 +80,5 @@ public class Window extends JFrame {
         exit.addActionListener(controller);
 
     }
+
 }

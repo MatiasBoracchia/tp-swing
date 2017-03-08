@@ -1,3 +1,7 @@
+package views;
+
+import controllers.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,12 +12,15 @@ import java.util.ArrayList;
  * Created by Usuario on 05-Mar-17.
  */
 
-public class SettingWindow extends JFrame {
-    JButton back;
-    public SettingWindow(Controller controller){
+public class SettingsWindow extends JFrame {
+
+    public JButton back;
+
+    public SettingsWindow(Controller controller) {
+
         //JFrame
         this.setTitle("Settings");
-        this.setSize(250,350);
+        this.setSize(250, 350);
         this.setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -22,13 +29,12 @@ public class SettingWindow extends JFrame {
         JPanel thePanel = new JPanel();
         this.add(thePanel);
 
-
         //Layout
-        BoxLayout boxLayout = new BoxLayout(thePanel,BoxLayout.PAGE_AXIS);
+        BoxLayout boxLayout = new BoxLayout(thePanel, BoxLayout.PAGE_AXIS);
         thePanel.setLayout(boxLayout);
 
         //Buttons & Labels
-        JLabel settings = new JLabel("Settings");
+        JLabel settings = new JLabel("Setting");
         JLabel sound = new JLabel("Sound:");
         final JRadioButton soundRadioButtons1 = new JRadioButton("On");
         final JRadioButton soundRadioButtons2 = new JRadioButton("Off");
@@ -39,7 +45,7 @@ public class SettingWindow extends JFrame {
         final JCheckBox graphicsCheckBox1 = new JCheckBox("Shadows");
         final JCheckBox graphicsCheckBox2 = new JCheckBox("Anti-aliasing");
         back = new JButton("Back");
-        back.setSize(100,40);
+        back.setSize(100, 40);
 
         //Sub Panels and ButtonGroups(For not having both buttons activated)
         JPanel settingsPanel = new JPanel();
@@ -59,7 +65,6 @@ public class SettingWindow extends JFrame {
         soundPanel.add(soundRadioButtons2);
         soundRadioButtons1.setSelected(true);
 
-
         JPanel musicPanel = new JPanel();
         musicPanel.add(music);
         musicPanel.add(musicRadioButtons1);
@@ -77,15 +82,12 @@ public class SettingWindow extends JFrame {
         checkBoxPanel.add(graphicsCheckBox1);
         checkBoxPanel.add(graphicsCheckBox2);
 
-
-
         graphicsCheckBox1.setSelected(true);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(back);
         buttonPanel.setPreferredSize(new Dimension(250, 50));
         back.setPreferredSize(new Dimension(200, 40));
-
 
         thePanel.add(soundPanel);
         thePanel.add(musicPanel);
@@ -97,7 +99,6 @@ public class SettingWindow extends JFrame {
         ActionListener printConfiguration = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 ArrayList<AbstractButton> array = new ArrayList<AbstractButton>();
                 ArrayList<AbstractButton> array2 = new ArrayList<AbstractButton>();
                 ArrayList<String> array3 = new ArrayList<String>();
@@ -107,24 +108,19 @@ public class SettingWindow extends JFrame {
                 array.add(musicRadioButtons2);
                 array.add(graphicsCheckBox1);
                 array.add(graphicsCheckBox2);
-
-                for(int i=0;i<4;i++){
-                    if(array.get(i).isSelected()){
+                for (int i = 0; i < 4; i++) {
+                    if (array.get(i).isSelected()) {
                         array2.add(array.get(i));
                     }
-
                 }
-                for(int i=4;i<array.size();i++){
-                    if(array.get(i).isSelected()){
+                for (int i = 4; i < array.size(); i++) {
+                    if (array.get(i).isSelected()) {
                         array3.add("On");
-                    }else{
+                    } else {
                         array3.add("Off");
                     }
-
                 }
-                System.out.println("Sound:"+array2.get(0).getText()+", "+"Music:"+array2.get(1).getText()+
-                        ", "+"Shadows:"+array3.get(0)+ ", "+"Anti-aliasing:"+array3.get(1));
-
+                System.out.println("Sound:" + array2.get(0).getText() + ", " + "Music:" + array2.get(1).getText() + ", " + "Shadows:" + array3.get(0) + ", " + "Anti-aliasing:" + array3.get(1));
             }
         };
 
@@ -137,5 +133,7 @@ public class SettingWindow extends JFrame {
 
 
         back.addActionListener(controller);
+
     }
+
 }
